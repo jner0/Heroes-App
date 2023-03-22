@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom"
 import { getHeroById } from "../helpers";
 
@@ -6,7 +7,7 @@ export const HeroPage = () => {
   const {id} = useParams(); //el ID viene de la ruta en donde se especifico /hero:id
   //console.log(id);
 
-  const hero = getHeroById(id);
+  const hero = useMemo( () => getHeroById(id), [id]);  //dispara la funcion de adentro cada vez que sus dependencias cambien
 
   const navigate = useNavigate();
   const onNavigateBack = () => {
@@ -23,7 +24,7 @@ export const HeroPage = () => {
         <img 
           src={`/assets/heroes/${id}.jpg`}
           alt={hero.superhero}
-          className="img-thumbnail"
+          className="img-thumbnail animate__animated animate__fadeInLeft"
         />
       </div>
 
