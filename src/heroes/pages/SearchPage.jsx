@@ -3,6 +3,7 @@ import queryString from 'query-string'; //este paqueto lo instalamos dentro del 
 
 import { useForm } from '../../hooks/useForm';
 import { HeroCard } from '../components';
+import { getHeroesByName } from '../helpers';
 
 export const SearchPage = () => {
 
@@ -10,9 +11,10 @@ export const SearchPage = () => {
   const location = useLocation(); //aqui obtenemos toda la info que esta en url
 
   const { q = '' } = queryString.parse(location.search); //procesa los query apram de manera separada
+  const heroes = getHeroesByName(q);
 
   const { searchText, onInputChange } = useForm({
-    searchText: ''
+    searchText: q
 
   });
 
@@ -63,6 +65,12 @@ export const SearchPage = () => {
                 <div className="alert alert-danger">
                   No Hero with <b>{q}</b>
                 </div>
+
+                {
+                  heroes.map( hero => (
+                    <HeroCard key={ hero.id } { ...hero } />
+                  ))
+                }
 
                 {/* <HeroCard/> */}
 
