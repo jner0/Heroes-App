@@ -5,10 +5,11 @@ import { AuthContext } from '../../auth/context/AuthContext';
 
 export const Navbar = () => {
 
-    const { user } = useContext( AuthContext )
+    const { user, logout } = useContext( AuthContext )
     const navigate = useNavigate(); //hook que viene en react para navegacion podemos accder a push y replace gracias a esto
 
     const onLogout = () => {
+        logout();
         navigate('/login', {
             replace: true //evita que se pueda regresar al historial anterior
         });
