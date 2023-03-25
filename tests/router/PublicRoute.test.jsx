@@ -34,7 +34,7 @@ describe('Pruebas en Public Route', () => {
 
         render(
             <AuthContext.Provider value={contextValue}>
-                <MemoryRouter initialEntries={['/login']}>
+                <MemoryRouter initialEntries={['/marvel']}>
 
                     <Routes>
                         <Route path='login' element={
@@ -48,7 +48,7 @@ describe('Pruebas en Public Route', () => {
             </AuthContext.Provider>
         );
 
-        screen.debug();
+        expect( screen.getByText('Pagina Marvel') ).toBeTruthy();
 
     });
 
